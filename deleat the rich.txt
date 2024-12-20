@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deleat the Rich</title>
+    <style>
+        /* Styles for Replace The Rich Dude */
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            width: 200px; /* Fixed width */
+            height: 200px; /* Fixed height */
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px; /* Optional for rounded corners */
+            background-color: #f0f0f0; /* Optional for background */
+            margin: 0 auto;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures images maintain aspect ratio while covering the container */
+            display: block;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button.remove-item {
+            background-color: #dc3545;
+        }
+
+        button.remove-item:hover {
+            background-color: #a71d2a;
+        }
+
+        .replacements, .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .replacement-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #finish-messages p {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Deleat The Rich</h1>
+
+    <!-- Famous Person Selection -->
+    <div class="form-section">
+      <p> Select a rich dude and replace them with stuff we actually need. The rich dude will slowly disappear as you replace him with more important things.
+<br>
+Suggestions for what we need are based on government recommendations. You can select whatever quantities you want in this game.<p>
+      <br>
+        <label for="famous-person">Select a Rich Dude:</label>
+        <select id="famous-person">
+            <option value="366650480000" data-image="https://cyprus-mail.com/wp-content/uploads/2024/08/comment-dyer-Elon-Musk-still-has-work-to-do.jpg">Elon Musk</option>
+            <option value="4347482414" data-image="https://d.newsweek.com/en/full/617512/rtx36h6s.jpg">Donald Trump</option>
+            <option value="651000000" data-image="https://media.gq-magazine.co.uk/photos/5e7ca203525b920008162b26/16:9/w_2560%2Cc_limit/20200326-sunak-02.jpg">Rishi Sunak</option>
+            <option value="150000000" data-image="https://www.platinummediagroup.co.uk/uploads/magazines/platinum-business/rees-mogg_topHat.jpg">Jacob Rees Mogg</option>
+            <option value="17600000000" data-image="https://e3.365dm.com/24/03/1600x900/skynews-rupert-murdoch-london_6496292.jpg?20240320212749">Rupert Murdoch</option>
+            <option value="25000000000" data-image="https://assets.bizclikmedia.net/1800/f86d9fac37b46c5d41cb5191abdc929e:9180b9ab861cb8700369c1595fecdc1d/sir-jim-ratcliffe-2-credit-ineos-group.jpg">Jim Ratcliffe</option>
+        </select>
+    </div>
+
+    <!-- Image Display -->
+    <div class="image-container">
+        <img id="famous-image" src="" alt="Famous Person">
+    </div>
+
+    <!-- Item Selection -->
+    <div class="form-section">
+        <h3>Replace with:</h3>
+        <label for="item">Item:</label>
+        <select id="item">
+            <option value="35000">Teachers (6,500 needed in the UK)</option>
+            <option value="28000">Nurses (40,000 needed in the UK)</option>
+            <option value="36000">Social Workers (13,000 needed in the UK)</option>
+            <option value="4">Free meals (9,464,000 needed a day in the UK)</option>
+            <option value="80000">GPs (5,000 needed in the UK)</option>
+            <option value="200000">Affordable homes (500,000 needed in the UK)</option>
+          <option value="5943000000">Free beer for all </option>
+        </select>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" value="1">
+        <button id="add-item">Add</button>
+    </div>
+
+    <!-- Replacements Section -->
+    <div class="replacements">
+        <h3>Replacements:</h3>
+        <div id="replacement-list"></div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="result">
+        <h3>Remaining Net Worth:</h3>
+        <p id="remaining-net-worth"></p>
+    </div>
+
+    <!-- Finish Button Section -->
+    <div class="form-section">
+        <button id="finish-button">Finish</button>
+        <div id="finish-messages"></div>
+    </div>
+
+    <script>
+        // JavaScript logic for Replace The Rich Dude
+
+        const famousPersonSelect = document.getElementById('famous-person');
+        const famousImage = document.getElementById('famous-image');
+        const itemSelect = document.getElementById('item');
+        const quantityInput = document.getElementById('quantity');
+        const addItemButton = document.getElementById('add-item');
+        const finishButton = document.getElementById('finish-button');
+        const remainingNetWorthDisplay = document.getElementById('remaining-net-worth');
+        const replacementList = document.getElementById('replacement-list');
+        const finishMessages = document.getElementById('finish-messages');
+
+        let initialNetWorth = parseInt(famousPersonSelect.value);
+        let remainingNetWorth = initialNetWorth;
+        const replacements = [];
+
+        // Update Image and Net Worth on Person Selection
+        famousPersonSelect.addEventListener('change', () => {
+            initialNetWorth = parseInt(famousPersonSelect.value);
+            remainingNetWorth = initialNetWorth;
+            const imageUrl = famousPersonSelect.options[famousPersonSelect.selectedIndex].getAttribute('data-image');
+            famousImage.src = imageUrl;
+            famousImage.style.clipPath = 'inset(0% 0% 0% 0%)';
+            updateNetWorthDisplay();
+            replacementList.innerHTML = ''; // Clear replacements on person change
+            replacements.length = 0; // Clear the replacements array
+        });
+
+        // Update Net Worth Display
+        function updateNetWorthDisplay() {
+            remainingNetWorthDisplay.textContent = `£${remainingNetWorth.toLocaleString()}`;
+            const cropPercentage = 100 - (remainingNetWorth / initialNetWorth) * 100;
+            famousImage.style.clipPath = `inset(${cropPercentage}% 0% 0% 0%)`;
+        }
+
+        // Add Replacement Item
+
+        addItemButton.addEventListener('click', () => {
+            const itemCost = parseInt(itemSelect.value);
+            const quantity = parseInt(quantityInput.value);
+            const itemName = itemSelect.options[itemSelect.selectedIndex].text;
+
+            if (!isNaN(itemCost) && !isNaN(quantity) && quantity > 0) {
+                const totalCost = itemCost * quantity;
+
+                if (totalCost <= remainingNetWorth) {
+                    remainingNetWorth -= totalCost;
+
+                    // Check if item already exists in the replacements
+                    let existingItem = replacements.find(replacement => replacement.item === itemName);
+                    if (existingItem) {
+                        // Update quantity and total cost
+                        existingItem.quantity += quantity;
+                        existingItem.totalCost += totalCost;
+
+                        // Update the displayed quantity
+                        const itemElement = document.querySelector(`.replacement-item[data-item="${itemName}"] .quantity`);
+                        itemElement.textContent = `Quantity: ${existingItem.quantity}`;
+                    } else {
+                        // Add new replacement item
+                        const replacementItem = document.createElement('div');
+                        replacementItem.className = 'replacement-item';
+                        replacementItem.setAttribute('data-item', itemName);
+                        replacementItem.innerHTML = `
+                            <span>${itemName}</span>
+                            <span class="quantity">Quantity: ${quantity}</span>
+                            <button class="remove-item">Remove</button>
+                        `;
+
+                        replacementList.appendChild(replacementItem);
+                        replacements.push({ item: itemName, quantity, totalCost });
+
+                        // Add Remove Functionality
+                        replacementItem.querySelector('.remove-item').addEventListener('click', () => {
+                            remainingNetWorth += totalCost;
+                            replacements.splice(replacements.indexOf(existingItem), 1);
+                            replacementItem.remove();
+                            updateNetWorthDisplay();
+                        });
+                    }
+
+                    updateNetWorthDisplay();
+                } else {
+                    alert('Sorry, more grifting needed before we can do that.');
+                }
+            }
+        });
+
+        // Finish Button Functionality
+        finishButton.addEventListener('click', () => {
+            finishMessages.innerHTML = ''; // Clear previous messages
+
+            if (replacements.length === 0) {
+                finishMessages.textContent = 'No replacements have been made yet.';
+                return;
+            }
+
+            replacements.forEach(({ item, quantity }) => {
+                let message = '';
+                switch (item) {
+                    case 'Teachers (6,500 needed in the UK)':
+                        message = `${quantity.toLocaleString()} extra teachers. Well done, you've given ${Math.round(quantity * 26).toLocaleString()} people a proper chance at life.`;
+                        break;
+                    case 'Nurses (40,000 needed in the UK)':
+                        message = `${quantity.toLocaleString()} extra nurses. Well done, you've unfucked the NHS by ${Math.round(quantity * 0.0025 * 100) / 100}%`;
+                        break;
+                    case 'Social Workers (13,000 needed in the UK)':
+                        message = `${quantity.toLocaleString()} extra social workers. Well done, you've protected ${Math.round(quantity * 18).toLocaleString()} vulnerable people from abuse.`;
+                        break;
+                    case 'Free meals (9,464,000 needed a day in the UK)':
+                        message = `${quantity.toLocaleString()} free meals. Well done, you've allowed ${quantity.toLocaleString()} people to ${quantity > 1 ? 's' : ''} not go hungry.`;
+                        break;
+                    case 'GPs (5,000 needed in the UK)':
+                        message = `${quantity.toLocaleString()} extra GPs. Well done, you've reduced the time to see a doctor by ${Math.round(quantity * 0.002).toLocaleString()} day(s).`;
+                        break;
+                    case 'Affordable homes (500,000 needed in the UK)':
+                        message = `${quantity.toLocaleString()} more affordable homes. Well done, you've stopped ${Math.round(quantity * 2).toLocaleString()} people worrying about homelessness.`;
+                        break;
+                    case 'Free beer for all':
+                        message = `${quantity.toLocaleString()}. You fucking legend`;
+                        break;
+                }
+                const messageElement = document.createElement('p');
+                messageElement.textContent = message;
+                finishMessages.appendChild(messageElement);
+            });
+        });
+
+        // Initialize Default State
+        famousPersonSelect.dispatchEvent(new Event('change'));
+    </script>
+</body>
+</html>
