@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deleat the Rich</title>
+    <script defer src="./app.js"></script>
+    <script src="https://codepen.io/Oli-Baise/pen/gbYmBLq.js"></script>
+    <link rel="stylesheet" href="./stutles.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Deleat The Rich</h1>
+
+    <!-- Famous Person Selection -->
+    <div class="form-section">
+      <p> Select a rich dude and replace them with stuff we actually need. The rich dude will slowly disappear as you replace him with more important things.
+<br>
+Suggestions for what we need are based on government recommendations. You can select whatever quantities you want in this game.<p>
+      <br>
+        <label for="famous-person">Select a Rich Dude:</label>
+        <select id="famous-person">
+            <option value="366650480000" data-image="https://cyprus-mail.com/wp-content/uploads/2024/08/comment-dyer-Elon-Musk-still-has-work-to-do.jpg">Elon Musk</option>
+            <option value="4347482414" data-image="https://d.newsweek.com/en/full/617512/rtx36h6s.jpg">Donald Trump</option>
+            <option value="651000000" data-image="https://media.gq-magazine.co.uk/photos/5e7ca203525b920008162b26/16:9/w_2560%2Cc_limit/20200326-sunak-02.jpg">Rishi Sunak</option>
+            <option value="150000000" data-image="https://www.platinummediagroup.co.uk/uploads/magazines/platinum-business/rees-mogg_topHat.jpg">Jacob Rees Mogg</option>
+            <option value="17600000000" data-image="https://e3.365dm.com/24/03/1600x900/skynews-rupert-murdoch-london_6496292.jpg?20240320212749">Rupert Murdoch</option>
+            <option value="25000000000" data-image="https://assets.bizclikmedia.net/1800/f86d9fac37b46c5d41cb5191abdc929e:9180b9ab861cb8700369c1595fecdc1d/sir-jim-ratcliffe-2-credit-ineos-group.jpg">Jim Ratcliffe</option>
+        </select>
+    </div>
+
+    <!-- Image Display -->
+    <div class="image-container">
+        <img id="famous-image" src="" alt="Famous Person">
+    </div>
+
+    <!-- Item Selection -->
+    <div class="form-section">
+        <h3>Replace with:</h3>
+        <label for="item">Item:</label>
+        <select id="item">
+            <option value="35000">Teachers (6,500 needed in the UK)</option>
+            <option value="28000">Nurses (40,000 needed in the UK)</option>
+            <option value="36000">Social Workers (13,000 needed in the UK)</option>
+            <option value="4">Free meals (9,464,000 needed a day in the UK)</option>
+            <option value="80000">GPs (5,000 needed in the UK)</option>
+            <option value="200000">Affordable homes (500,000 needed in the UK)</option>
+          <option value="5943000000">Free beer for all </option>
+        </select>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" value="1">
+        <button id="add-item">Add</button>
+    </div>
+
+    <!-- Replacements Section -->
+    <div class="replacements">
+        <h3>Replacements:</h3>
+        <div id="replacement-list"></div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="result">
+        <h3>Remaining Net Worth:</h3>
+        <p id="remaining-net-worth"></p>
+    </div>
+
+    <!-- Finish Button Section -->
+    <div class="form-section">
+        <button id="finish-button">Finish</button>
+        <div id="finish-messages"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
