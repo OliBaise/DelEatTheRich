@@ -24,6 +24,7 @@ famousPersonSelect.addEventListener('change', () => {
     updateNetWorthDisplay();
     replacementList.innerHTML = ''; // Clear replacements on person change
     replacements.length = 0; // Clear the replacements array
+    finishMessages.innerHTML = ''; // **Clear finish messages explicitly**
 });
 
 // Update Net Worth Display
