@@ -78,3 +78,22 @@ button.remove-item:hover {
     margin-bottom: 5px;
     border: 1px solid #c3e6cb;
 }
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .replacement-item {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the left */
+        padding: 10px 0; /* Add vertical spacing */
+    }
+
+    .replacement-item span {
+        margin-bottom: 5px; /* Add spacing between text elements */
+    }
+
+    .replacement-item button {
+        margin-top: 5px; /* Add spacing above the button */
+        align-self: flex-start; /* Align the button to the left */
+    }
+}
+
