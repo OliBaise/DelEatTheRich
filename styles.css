@@ -65,9 +65,21 @@ button.remove-item:hover {
 }
 
 .replacement-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    display: flex; /* Ensure a flexible row layout */
+    justify-content: space-between; /* Space out elements */
+    align-items: center; /* Align elements vertically */
+    padding: 10px; /* Add padding around each replacement item */
+    border-bottom: 1px solid #ddd; /* Optional: Add a divider for clarity */
+}
+
+.replacement-item span {
+    flex: 1; /* Make the text take up the available space */
+    text-align: left; /* Align text to the left */
+}
+
+.replacement-item button {
+    margin-left: 10px; /* Add space between the text and the button */
+    flex-shrink: 0; /* Prevent the button from shrinking */
 }
 
 #finish-messages p {
