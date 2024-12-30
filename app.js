@@ -118,7 +118,7 @@ finishButton.addEventListener('click', () => {
                 message = `${quantity.toLocaleString()} more affordable homes. Well done, you've stopped ${Math.round(quantity * 2).toLocaleString()} people worrying about homelessness.`;
                 break;
             case 'Free beer for all':
-                message = `${quantity.toLocaleString()}. You fucking legend`;
+                message = `${quantity.toLocaleString()}. Free beer for all. You fucking legend`;
                 break;
         }
         const messageElement = document.createElement('p');
