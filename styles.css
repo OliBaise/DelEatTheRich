@@ -66,7 +66,7 @@ button.remove-item:hover {
 
 .replacement-item {
     display: flex; /* Ensure a flexible row layout */
-    justify-content: space-between; /* Space out elements */
+    justify-content: space-evenly; /* Space out elements */
     align-items: center; /* Align elements vertically */
     padding: 10px; /* Add padding around each replacement item */
     border-bottom: 1px solid #ddd; /* Optional: Add a divider for clarity */
